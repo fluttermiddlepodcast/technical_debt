@@ -5,11 +5,11 @@ class TechnicalDebt {
     required this.author,
     required this.description,
     required this.severity,
-    required this.deadline,
+    this.deadline = '',
   });
 
   final String author;
   final String description;
   final Severity severity;
-  final String deadline;
+  final String? deadline;
 }
