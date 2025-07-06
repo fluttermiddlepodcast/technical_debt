@@ -1,0 +1,23 @@
+name: technical_debt
+description: Simple example that covers basic code generation theory and practice
+version: 1.0.0
+repository: https://github.com/fluttermiddlepodcast/technical_debt
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+dependencies:
+  analyzer: ^7.4.5
+  build: ^2.3.1
+  collection: ^1.19.1
+  meta: ^1.16.0
+  source_gen: ^2.0.0
+  glob:
+  path:
+
+dev_dependencies:
+  build_runner: ^2.4.15
+
+  test: ^1.26.2
+
+  lints: ^5.0.0

@@ -1,0 +1,4 @@
+enum Severity {
+  minor,
+  major,
+}

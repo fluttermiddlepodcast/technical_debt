@@ -1,0 +1,35 @@
+name: Dart
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  DART_VERSION: 3.6.0
+
+jobs:
+  formatter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v1.0
+        with:
+          sdk: ${{ env.DART_VERSION }}
+      - name: Install dependencies
+        run: dart pub get
+      - name: Run Dart format
+        run: dart format ./ -l 120 --set-exit-if-changed
+
+  analyzer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dart-lang/setup-dart@v1.0
+        with:
+          sdk: ${{ env.DART_VERSION }}
+      - name: Install dependencies
+        run: dart pub get
+      - name: Run Dart Analyzer
+        run: dart analyze --fatal-warnings --fatal-infos
