@@ -30,15 +30,15 @@ class TechnicalDebtCollectorBuilder implements Builder {
         final annotationData = annotation.computeConstantValue();
 
         if (annotationData != null && annotationData.type?.element3?.name3 == 'TechnicalDebt') {
-            debts.add(
-              {
-                'file': inputId.path,
-                'author': annotationData.getField('author')?.toStringValue(),
-                'description': annotationData.getField('description')?.toStringValue(),
-                'severity': annotationData.getField('severity')?.getField('_name')?.toStringValue(),
-                'deadline': annotationData.getField('deadline')?.toStringValue(),
-              },
-            );
+          debts.add(
+            {
+              'file': inputId.path,
+              'author': annotationData.getField('author')?.toStringValue(),
+              'description': annotationData.getField('description')?.toStringValue(),
+              'severity': annotationData.getField('severity')?.getField('_name')?.toStringValue(),
+              'deadline': annotationData.getField('deadline')?.toStringValue(),
+            },
+          );
         }
       }
     }
