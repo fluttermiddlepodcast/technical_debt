@@ -12,13 +12,13 @@
 **Что нужно сделать:**
 
 - вынести аннотации в отдельный пакет;
-- импортировать аннотации в `dependencies`, а сам генератор в `dev_dependencies`.
+- импортировать аннотации в `dependencies`, а сам генератор в `dev_dependencies`;
 
 ## Структура проекта
 
 ### TechnicalDebtDataCollector
 
-[Файл тут](lib/generators/technical_debt_generator.dart).
+[Файл тут](lib/generators/technical_debt_data_collector.dart).
 
 Собирает все технические долги по проекту и конвертирует полученную информацию в JSON.
 

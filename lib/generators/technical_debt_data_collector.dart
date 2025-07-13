@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:analyzer/dart/constant/value.dart';
-import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -28,17 +26,20 @@ class TechnicalDebtCollectorBuilder implements Builder {
     final debts = <Map<String, dynamic>>[];
 
     for (final element in reader.allElements) {
-      final annotation = _getAnnotation(element);
-      if (annotation != null) {
-        debts.add(
-          {
-            'file': inputId.path,
-            'author': annotation.getField('author')?.toStringValue(),
-            'description': annotation.getField('description')?.toStringValue(),
-            'severity': annotation.getField('severity')?.getField('_name')?.toStringValue(),
-            'deadline': annotation.getField('deadline')?.toStringValue(),
-          },
-        );
+      for (final annotation in element.metadata) {
+        final annotationData = annotation.computeConstantValue();
+
+        if (annotationData != null && annotationData.type?.element3?.name3 == 'TechnicalDebt') {
+            debts.add(
+              {
+                'file': inputId.path,
+                'author': annotationData.getField('author')?.toStringValue(),
+                'description': annotationData.getField('description')?.toStringValue(),
+                'severity': annotationData.getField('severity')?.getField('_name')?.toStringValue(),
+                'deadline': annotationData.getField('deadline')?.toStringValue(),
+              },
+            );
+        }
       }
     }
 
@@ -52,16 +53,5 @@ class TechnicalDebtCollectorBuilder implements Builder {
         jsonEncode(debts),
       );
     }
-  }
-
-  DartObject? _getAnnotation(Element element) {
-    for (final meta in element.metadata) {
-      final value = meta.computeConstantValue();
-      final type = value?.type;
-      if (type != null && type.element?.name == 'TechnicalDebt') {
-        return value;
-      }
-    }
-    return null;
   }
 }
